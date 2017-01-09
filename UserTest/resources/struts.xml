@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+
+    <package name="default" namespace="/" extends="struts-default">
+
+        <default-action-ref name="index" />
+
+        <global-results>
+            <result name="error">/error.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+
+        
+ 
+
+    <action name="loginaction"  class="action.UserAction" method="Login">
+      <result name="success">index.jsp</result>
+      <result name="error">login.jsp</result>
+    </action>
+
+    
+   </package>
+   
+   
+   <!-- json注册 -->
+     <package name="josn_default" namespace="/" extends="json-default">
+       	<action name="zhuceaction" class="action.UserAction" method="zhuce">
+			<result type="json">
+				<param name="root">data</param>
+				<param name="includeProperties">num</param> 
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+		
+		<action name="zhuceUnameaction" class="action.UserAction" method="zhuceuname">
+			<result type="json">
+				<param name="root">udata</param>
+				<param name="includeProperties">user</param> 
+				<param name="excludeNullProperties">true</param>
+			</result>
+		</action>
+     </package>
+</struts>
